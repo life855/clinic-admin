@@ -1,3 +1,12 @@
+<?php 
+require_once __DIR__ . '/negocio/Globales.php';
+session_start();
+
+if (isset($_SESSION['user'])){
+    header("Location: " . URL_BASE . "vista/index.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -41,15 +50,15 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">¡Bienvenido(a)!</h1>
                                     </div>
-                                    <form class="user">
+                                    <form id="loginForm">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Usuario">
+                                            <input type="text" class="form-control form-control-user"
+                                                id="usuario" aria-describedby="emailHelp"
+                                                placeholder="Usuario" required>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Contraseña">
+                                                id="clave" placeholder="Contraseña" required>
                                         </div>
                                         <!-- <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -58,10 +67,11 @@
                                                     Me</label>
                                             </div>
                                         </div> -->
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
-                                        </a>
+                                        </button>
                                     </form>
+                                    <div id="loginMsg" class="mt-3"></div>
 <!--                                     <div class="text-center">
                                         <a class="small" href="forgot-password.html">Forgot Password?</a>
                                     </div>
@@ -81,14 +91,18 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vista/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="vista/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vista/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="vista/assets/js/sb-admin-2.min.js"></script>
+
+    <!-- Custom -->
+    <script>var url_base = '<?php echo URL_BASE;?>';</script>
+    <script src="vista/assets/js/custom-login.js"></script>
 
 </body>
 
