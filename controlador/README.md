@@ -1,2 +1,0 @@
-soy el controlador
-
