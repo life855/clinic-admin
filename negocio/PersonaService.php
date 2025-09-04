@@ -27,7 +27,7 @@ class PersonaService {
 
         // aquí asumo que $personaData['clave'] ya viene hasheada
         $newId = $this->model->insertPersona($personaData);
-        if ($newId <= 0) {
+        if ($newId <= 0 || empty($newId)) {
             throw new Exception("No se pudo insertar persona");
         }
         $this->model->insertRelaciones($newId, $docs, $tels, $dirs);

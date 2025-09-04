@@ -35,6 +35,7 @@ try {
     } elseif ($action === 'register') {
         // ejemplo de registro, cuerpo JSON
         $input = json_decode(file_get_contents('php://input'), true);
+
         if (!$input) {
             http_response_code(400);
             echo json_encode(['success'=>false,'message'=>'payload inválido']);
@@ -44,23 +45,23 @@ try {
         $nombres = $input['nombres'] ?? null;
         $apellido = $input['apellido'] ?? null;
         $usuario = $input['usuario'] ?? null;
-        $clave_plain = $input['clave'] ?? null;
+        $clave_plain = $input['clave'] ?? "123123";
 
-        if (!$nombres || !$apellido || !$usuario || !$clave_plain) {
+        if (!$nombres || !$apellido) {
             http_response_code(400);
             echo json_encode(['success'=>false,'message'=>'Faltan datos obligatorios']);
             exit;
         }
 
         // hash de la clave en PHP
-        $clave_hash = password_hash($clave_plain, PASSWORD_BCRYPT);
+        // $clave_hash = password_hash($clave_plain, PASSWORD_BCRYPT);
 
         $personaData = [
             'nombres' => $nombres,
             'apellido' => $apellido,
             'nacimiento' => $input['nacimiento'] ?? null,
             'usuario' => $usuario,
-            'clave' => $clave_hash,
+            'clave' => $clave_plain,
             'genero' => $input['genero'] ?? null,
             'estadoCivil' => $input['estadoCivil'] ?? null
         ];

@@ -18,7 +18,7 @@ if (isset($_SESSION['user'])){
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <title>Gracia Divina | Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="vista/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -31,7 +31,14 @@ if (isset($_SESSION['user'])){
 
 </head>
 
-<body class="bg-gradient-primary">
+<style>
+    .color-dorado {
+        background-color: gold;
+        background-image: linear-gradient(180deg, gold 10%, goldenrod 100%);
+        background-size: cover;
+    }
+</style>
+<body class="bg-gradient-primary color-dorado">
 
     <div class="container">
 

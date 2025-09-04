@@ -39,12 +39,37 @@ class PersonaModel {
         return (int)$row['per_cod'];
     }
 
+    // insertando persona por el form paciente
+    public function insertar(array $data): int {
+        $sql = "CALL sp_insert(:nombres, :apellidos, :nacimiento, :usuario, :clave, :sexo, :estado_civil, :tipo_documento, :codigo_documento, :tel_principal, :num_principal, :telefono_secundario, :num_secundario, :correo_tipo1, :correo1, :correo_tipo2, :correo2)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":nombres", $data["nombres"]);
+        $stmt->bindValue(":apellidos", $data["apellidos"]);
+        $stmt->bindValue(":nacimiento", $data["nacimiento"]);
+        $stmt->bindValue(":usuario", $data["usuario"]);
+        $stmt->bindValue(":clave", $data["clave"]);
+        $stmt->bindValue(":sexo", $data["sexo"]);
+        $stmt->bindValue(":estado_civil", $data["estado_civil"]);
+        $stmt->bindValue(":tipo_documento", $data["tipo_documento"]);
+        $stmt->bindValue(":codigo_documento", $data["codigo_documento"]);
+        $stmt->bindValue(":tel_principal", $data["telefono_principal"]);
+        $stmt->bindValue(":num_principal", $data["num_principal"]);
+        $stmt->bindValue(":tel_secundario", $data["telefono_secundario"]);
+        $stmt->bindValue(":num_secundario", $data["num_secundario"]);
+        $stmt->bindValue(":correo_tipo1", $data["correo_tipo1"]);
+        $stmt->bindValue(":correo1", $data["correo1"]);
+        $stmt->bindValue(":correo_tipo2", $data["correo_tipo2"]);
+        $stmt->bindValue(":correo2", $data["correo2"]);
+        $stmt->execute();
+        $stmt->closeCursor();
+    }
+
     // inserta relaciones a través del SP que acepta JSON
     public function insertRelaciones(int $per_cod, ?array $docs = null, ?array $tels = null, ?array $dirs = null): void {
         $docs_json = $docs ? json_encode($docs, JSON_UNESCAPED_UNICODE) : null;
         $tels_json = $tels ? json_encode($tels, JSON_UNESCAPED_UNICODE) : null;
         $dirs_json = $dirs ? json_encode($dirs, JSON_UNESCAPED_UNICODE) : null;
-
+        
         $sql = "CALL sp_insert_persona_relaciones(:per_cod, :docs_json, :tels_json, :dirs_json)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':per_cod', $per_cod, PDO::PARAM_INT);

@@ -1,9 +1,5 @@
-document.getElementById('loginForm').addEventListener('submit', async function(e){
+document.getElementById('registrar-paciente').addEventListener('submit', async function(e){
     e.preventDefault();
-    const usuario = document.getElementById('usuario').value.trim();
-    const clave = document.getElementById('clave').value;
-
-    const payload = { usuario, clave };
 
     try {
         const resp = await fetch(url_base + 'controlador/personaController.php?action=login', {
@@ -11,8 +7,10 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(payload)
         });
+        
         const data = await resp.json();
         const msgEl = document.getElementById('loginMsg');
+
         if (data.success) {
             msgEl.innerHTML = '<div class="alert alert-success">Ingreso correcto. Redireccionando...</div>';
             // redirigir a dashboard
@@ -22,6 +20,5 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         }
     } catch (err) {
         console.log(err);
-        document.getElementById('loginMsg').innerHTML = '<div class="alert alert-danger">Error de comunicación</div>';
     }
 });

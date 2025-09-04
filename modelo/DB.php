@@ -18,7 +18,12 @@ class DB {
             PDO::ATTR_EMULATE_PREPARES   => false,
         ];
 
-        $this->pdo = new PDO($dsn, $user, $pass, $options);
+        try {
+            $this->pdo = new PDO($dsn, $user, $pass, $options);
+        } catch (PDOException $e) {
+            echo "<pre>ERROR DE CONEXIÓN: " . $e->getMessage() . "</pre>";
+            exit;
+        }
     }
 
     public static function getInstance() {

@@ -60,7 +60,7 @@ require "template/cabecera.php";
 	}
 </style>
 <!-- Begin Page Content -->
-    <div class="container">
+    <form class="container" id="registrar-paciente">
     <!-- <div class="container-fluid"> -->
     	<fieldset class="row">
     		<div class="col-12">
@@ -69,30 +69,30 @@ require "template/cabecera.php";
 
     		<div class="col-12 col-sm-4">
     			<div class="form-group">
-    				<label for="tip_doc">Tipo documento</label>
+    				<label for="tipo_doc">Tipo documento</label>
     				<div class="input-group mb-3">
 					  <div class="input-group-prepend">
-					    <select class="custom-select esquinas">
+					    <select class="custom-select esquinas" id="select-tipo-doc">
 						    <!-- <option selected>Choose...</option> -->
 						    <option value="1" selected>DNI</option>
 						    <option value="2">Carné ext.</option>
 						    <option value="3">Pasaporte</option>
 						</select>
 					  </div>
-					  <input type="text" class="form-control" id="tip_doc">
+					  <input type="text" class="form-control" id="tipo_doc" autocomplete="off">
 					</div>
     			</div>
     		</div>
     		<div class="col-12 col-sm-4">
     			<div class="form-group">
 				    <label for="nombres">Nombres</label>
-				    <input type="text" class="form-control" id="nombres">
+				    <input type="text" class="form-control" id="nombres" required autocomplete="off">
 				</div>
     		</div>
     		<div class="col-12 col-sm-4">
     			<div class="form-group">
 				    <label for="apellidos">Apellidos</label>
-				    <input type="text" class="form-control" id="apellidos">
+				    <input type="text" class="form-control" id="apellidos" required autocomplete="off">
 				</div>
     		</div>
 
@@ -102,13 +102,13 @@ require "template/cabecera.php";
 	    			<div class="col-9">
 		    			<div class="form-group">
 							<label for="fecha_nacimiento">Fecha de nacimiento</label>
-							<input type="date" class="form-control" id="fecha_nacimiento">
+							<input type="date" class="form-control" id="fecha_nacimiento" required autocomplete="off">
 						</div>
 		    		</div>
 		    		<div class="col-3">
 		    			<div class="form-group">
 							<label for="edad">Edad</label>
-							<input type="num" class="form-control" id="edad" disabled>
+							<input type="number" class="form-control" id="edad" disabled>
 						</div>
 		    		</div>
 	    		</div>
@@ -118,11 +118,11 @@ require "template/cabecera.php";
     				<label>Sexo</label><br>
 					<div class="sexo-container">
 						<div class="sexo-item">
-							<input type="radio" name="sexo" value="masculino" id="M" required>
+							<input type="radio" name="sexo" value="1" id="M" required>
 							<label for="M" class="no-margin">Masculino</label>
 						</div>
 						<div class="sexo-item">
-							<input type="radio" name="sexo" value="femenino" id="F" required>
+							<input type="radio" name="sexo" value="2" id="F" required>
 							<label for="F" class="no-margin">Femenino</label>
 						</div>
 					</div>
@@ -132,7 +132,7 @@ require "template/cabecera.php";
     			<div class="form-group">
     				<label>Estado civil</label>
 	    			<div class="input-group mb-3">
-		    			<select class="custom-select">
+		    			<select class="custom-select" id="estadoCivil">
 						  <option value="1" selected>Nada</option>
 						  <option value="2">Soltero(a)</option>
 						  <option value="3">Casado(a)</option>
@@ -151,7 +151,7 @@ require "template/cabecera.php";
 	    	<div class="col-12 col-sm-4">
 	    		<div class="form-group">
 				    <label>Localidad o Distrito</label>
-				    <select class="custom-select">
+				    <select class="custom-select" id="localidad-distrito">
 					  <option value="1" selected>Chicama</option>
 					  <option value="2">Chiclín</option>
 					  <option value="3">Chocope</option>
@@ -167,13 +167,13 @@ require "template/cabecera.php";
 	    			<label style="margin-left: 2.7rem;">Número teléfono</label>
 	    			<div class="input-group">
 					  <div class="input-group-prepend">
-					    <select class="custom-select esquinas">
-						    <option value="whatsapp" selected>WhatsApp</option>
-						    <option value="llamadas">Sólo llamadas</option>
-						    <option value="fijo">Teléfono fijo</option>
+					    <select class="custom-select esquinas" id="select-tel-principal" required>
+						    <option value="1" selected>WhatsApp</option>
+						    <option value="2">Sólo llamadas</option>
+						    <option value="3">Teléfono fijo</option>
 						</select>
 					  </div>
-					  <input type="text" class="form-control" id="telefono">
+					  <input type="text" class="form-control" id="telefono_principal">
 					  <div class="input-group-append">
 					    <label class="input-group-text">Principal</label>
 					  </div>
@@ -183,12 +183,12 @@ require "template/cabecera.php";
 	    			<div class="input-group">
 					  <div class="input-group-prepend">
 					    <select class="custom-select esquinas">
-						    <option value="whatsapp" selected>WhatsApp</option>
-						    <option value="llamadas">Sólo llamadas</option>
-						    <option value="fijo">Teléfono fijo</option>
+						    <option value="1" selected>WhatsApp</option>
+						    <option value="2">Sólo llamadas</option>
+						    <option value="3">Teléfono fijo</option>
 						</select>
 					  </div>
-					  <input type="text" class="form-control" id="telefono">
+					  <input type="text" class="form-control" id="telefono_secundario">
 					  <div class="input-group-append">
 					    <label class="input-group-text">Secundario</label>
 					  </div>
@@ -201,8 +201,8 @@ require "template/cabecera.php";
 	    			<div class="input-group">
 					  <div class="input-group-prepend">
 					    <select class="custom-select esquinas">
-						    <option value="personal" selected>Personal</option>
-						    <option value="institucional">Institucional</option>
+						    <option value="1" selected>Personal</option>
+						    <option value="2">Institucional</option>
 						</select>
 					  </div>
 					  <input type="text" class="form-control" id="telefono">
@@ -212,8 +212,8 @@ require "template/cabecera.php";
 	    			<div class="input-group">
 					  <div class="input-group-prepend">
 					    <select class="custom-select esquinas">
-						    <option value="personal" selected>Personal</option>
-						    <option value="institucional">Institucional</option>
+						    <option value="1" selected>Personal</option>
+						    <option value="2">Institucional</option>
 						</select>
 					  </div>
 					  <input type="text" class="form-control" id="telefono">
@@ -393,10 +393,16 @@ require "template/cabecera.php";
 		  	</div>
 
 		</fieldset>
-  
-    </div>
-
-
+  	
+  		<fieldset class="row">
+			<div class="col-12 mt-3">
+				<button id="btnEnviarDatos" type="submit" class="btn btn-info">ENVIAR DATOSS</button>
+			</div>
+		</fieldset>
+  		
+    </form>
+<script>var url_base = '<?php echo URL_BASE;?>';</script>
+<script src="assets/js/registro-paciente.js"></script>
 <!-- /.container-fluid -->
 <?php
 require "template/pie.php";
